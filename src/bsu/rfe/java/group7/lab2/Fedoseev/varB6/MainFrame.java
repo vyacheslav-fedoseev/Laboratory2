@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
 // как компоненты, совместно используемые в различных методах
     private JTextField textFieldX;
     private JTextField textFieldY;
+    private JTextField textFieldZ;
     // Текстовое поле для отображения результата,
 // как компонент, совместно используемый в различных методах
     private JTextField textFieldResult;
@@ -25,12 +26,20 @@ public class MainFrame extends JFrame {
     private Box hboxFormulaType = Box.createHorizontalBox();
     private int formulaId = 1;
     // Формула №1 для рассчѐта
-    public Double calculate1(Double x, Double y) {
+    /*public Double calculate1(Double x, Double y) {
         return x*x + y*y;
     }
     // Формула №2 для рассчѐта
     public Double calculate2(Double x, Double y) {
         return x*x*x + 1/y;
+    }*/
+
+    public Double calculate1(Double x, Double y, Double z){
+        return Math.pow(Math.log((1+z)*(1+z)) + Math.cos(Math.PI*y*y*y),0.25) /
+                Math.pow((Math.cos(Math.exp(x)) + Math.sqrt(1/x) + Math.exp(x*x)),Math.sin(x));
+    }
+    public Double calculate2(Double x, Double y, Double z){
+        return (Math.tan(x*x)+Math.sqrt(y))/(z*Math.log10(x+y));
     }
 
     // Вспомогательный метод для добавления кнопок на панель
@@ -49,7 +58,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("Вычисление формулы");
         setSize(WIDTH, HEIGHT);
-        Toolkit kit = Toolkit.getDefaultToolkit();
+        Toolkit kit = Toolkit.getDefaultToolkit(); //для взаимодействия с ОС, получения информации и т.п.
 // Отцентрировать окно приложения на экране
         setLocation((kit.getScreenSize().width - WIDTH)/2,
                 (kit.getScreenSize().height - HEIGHT)/2);
@@ -68,6 +77,9 @@ public class MainFrame extends JFrame {
         JLabel labelForY = new JLabel("Y:");
         textFieldY = new JTextField("0", 10);
         textFieldY.setMaximumSize(textFieldY.getPreferredSize());
+        JLabel labelForZ = new JLabel("Z:");
+        textFieldZ = new JTextField("0", 10);
+        textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
         Box hboxVariables = Box.createHorizontalBox();
         hboxVariables.setBorder(
                 BorderFactory.createLineBorder(Color.RED));
@@ -75,10 +87,14 @@ public class MainFrame extends JFrame {
         hboxVariables.add(labelForX);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldX);
-        hboxVariables.add(Box.createHorizontalStrut(100));
+        hboxVariables.add(Box.createHorizontalStrut(50));
         hboxVariables.add(labelForY);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldY);
+        hboxVariables.add(Box.createHorizontalStrut(50));
+        hboxVariables.add(labelForZ);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldZ);
         hboxVariables.add(Box.createHorizontalGlue());
 // Создать область для вывода результата
         JLabel labelForResult = new JLabel("Результат:");
@@ -100,11 +116,12 @@ public class MainFrame extends JFrame {
                 try {
                     Double x = Double.parseDouble(textFieldX.getText());
                     Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
                     Double result;
                     if (formulaId==1)
-                        result = calculate1(x, y);
+                        result = calculate1(x, y, z);
                     else
-                        result = calculate2(x, y);
+                        result = calculate2(x, y, z);
                     textFieldResult.setText(result.toString());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(MainFrame.this,
@@ -118,6 +135,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent ev) {
                 textFieldX.setText("0");
                 textFieldY.setText("0");
+                textFieldZ.setText("0");
                 textFieldResult.setText("0");
             }
         });
