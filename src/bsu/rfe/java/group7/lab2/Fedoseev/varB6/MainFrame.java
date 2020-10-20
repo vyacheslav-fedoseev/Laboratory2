@@ -53,6 +53,7 @@ public class MainFrame extends JFrame {
         radioButtons.add(button);
         hboxFormulaType.add(button);
     }
+    // Ещё один вспомогательный метод для добавления кнопок
     private void addMemRadioButton(String buttonName, final int memID) {
         JRadioButton button = new JRadioButton(buttonName);
         button.addActionListener(new ActionListener() {
@@ -80,10 +81,10 @@ public class MainFrame extends JFrame {
         super("Вычисление формулы");
         setSize(WIDTH, HEIGHT);
         Toolkit kit = Toolkit.getDefaultToolkit(); //для взаимодействия с ОС, получения информации и т.п.
-// Отцентрировать окно приложения на экране
+
+        // Отцентрировать окно приложения на экране
         setLocation((kit.getScreenSize().width - WIDTH)/2,
                 (kit.getScreenSize().height - HEIGHT)/2);
-
         hboxFormulaType.add(Box.createHorizontalGlue());
         addRadioButton("Формула 1", 1);
         addRadioButton("Формула 2", 2);
@@ -92,7 +93,6 @@ public class MainFrame extends JFrame {
         hboxFormulaType.add(Box.createHorizontalGlue());
         hboxFormulaType.setBorder(
                 BorderFactory.createLineBorder(Color.YELLOW));
-
         hboxMemType.add(Box.createHorizontalGlue());
         addMemRadioButton("Переменная 1", 1);
         addMemRadioButton("Переменная 2", 2);
@@ -129,9 +129,9 @@ public class MainFrame extends JFrame {
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldZ);
         hboxVariables.add(Box.createHorizontalGlue());
+
 // Создать область для вывода результата
         JLabel labelForResult = new JLabel("Результат:");
-//labelResult = new JLabel("0");
         textFieldResult = new JTextField("0", 10);
         textFieldResult.setMaximumSize(
                 textFieldResult.getPreferredSize());
@@ -183,25 +183,47 @@ public class MainFrame extends JFrame {
         hboxButtons.setBorder(
                 BorderFactory.createLineBorder(Color.GREEN));
 
-        ///////////////////////////////////////////////////////////////////////////////////////
         JButton buttonMC = new JButton("MC");
         buttonMC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
                 switch (memID){
                     case 1:
                         mem1 = 0.0;
+                        break;
                     case 2:
                         mem2 = 0.0;
+                        break;
                     case 3:
                         mem3 = 0.0;
+                        break;
                 }
-                textFieldResult.setText("text MC");
+                textFieldResult.setText("0.0");
             }
         });
         JButton buttonMPlus = new JButton("M+");
         buttonMPlus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
-                textFieldResult.setText("text M+");
+                try {
+                    Double result = Double.parseDouble(textFieldResult.getText());
+                    switch (memID) {
+                        case 1:
+                            mem1 += result;
+                            textFieldResult.setText(mem1.toString());
+                            break;
+                        case 2:
+                            mem2 += result;
+                            textFieldResult.setText(mem2.toString());
+                            break;
+                        case 3:
+                            mem3 += result;
+                            textFieldResult.setText(mem3.toString());
+                            break;
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this,
+                            "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -213,8 +235,6 @@ public class MainFrame extends JFrame {
         hboxButtonsM.add(Box.createHorizontalGlue());
         hboxButtonsM.setBorder(
                 BorderFactory.createLineBorder(Color.PINK));
-        ///////////
-
 
 // Связать области воедино в компоновке BoxLayout
         Box contentBox = Box.createVerticalBox();
