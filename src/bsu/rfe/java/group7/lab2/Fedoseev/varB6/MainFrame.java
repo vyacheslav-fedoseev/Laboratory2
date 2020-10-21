@@ -116,19 +116,20 @@ public class MainFrame extends JFrame {
         Box hboxVariables = Box.createHorizontalBox();
         hboxVariables.setBorder(
                 BorderFactory.createLineBorder(Color.RED));
-        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(labelForX);
         hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(textFieldX);
-        hboxVariables.add(Box.createHorizontalStrut(30));
+        hboxVariables.add(Box.createHorizontalStrut(70));
         hboxVariables.add(labelForY);
         hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(textFieldY);
-        hboxVariables.add(Box.createHorizontalStrut(30));
+        hboxVariables.add(Box.createHorizontalStrut(70));
         hboxVariables.add(labelForZ);
         hboxVariables.add(Box.createHorizontalStrut(10));
-        hboxVariables.add(textFieldZ);
         hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(textFieldZ);
 
 // Создать область для вывода результата
         JLabel labelForResult = new JLabel("Результат:");
