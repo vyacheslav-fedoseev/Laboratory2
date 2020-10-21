@@ -118,17 +118,14 @@ public class MainFrame extends JFrame {
                 BorderFactory.createLineBorder(Color.RED));
         hboxVariables.add(labelForX);
         hboxVariables.add(Box.createHorizontalStrut(10));
-        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(textFieldX);
-        hboxVariables.add(Box.createHorizontalStrut(70));
+        hboxFormulaType.add(Box.createHorizontalGlue());
         hboxVariables.add(labelForY);
         hboxVariables.add(Box.createHorizontalStrut(10));
-        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(textFieldY);
-        hboxVariables.add(Box.createHorizontalStrut(70));
+        hboxFormulaType.add(Box.createHorizontalGlue());
         hboxVariables.add(labelForZ);
         hboxVariables.add(Box.createHorizontalStrut(10));
-        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(textFieldZ);
 
 // Создать область для вывода результата
