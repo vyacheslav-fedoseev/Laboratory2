@@ -105,13 +105,13 @@ public class MainFrame extends JFrame {
 
 // Создать область с полями ввода для X и Y
         JLabel labelForX = new JLabel("X:");
-        textFieldX = new JTextField("0", 5);
+        textFieldX = new JTextField("0", 8);
         textFieldX.setMaximumSize(textFieldX.getPreferredSize());
         JLabel labelForY = new JLabel("Y:");
-        textFieldY = new JTextField("0", 5);
+        textFieldY = new JTextField("0", 8);
         textFieldY.setMaximumSize(textFieldY.getPreferredSize());
         JLabel labelForZ = new JLabel("Z:");
-        textFieldZ = new JTextField("0", 5);
+        textFieldZ = new JTextField("0", 8);
         textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
         Box hboxVariables = Box.createHorizontalBox();
         hboxVariables.setBorder(
@@ -119,11 +119,11 @@ public class MainFrame extends JFrame {
         hboxVariables.add(labelForX);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldX);
-        hboxFormulaType.add(Box.createHorizontalGlue());
+        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(labelForY);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldY);
-        hboxFormulaType.add(Box.createHorizontalGlue());
+        hboxVariables.add(Box.createHorizontalGlue());
         hboxVariables.add(labelForZ);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldZ);
@@ -226,11 +226,9 @@ public class MainFrame extends JFrame {
         });
 
         Box hboxButtonsM = Box.createHorizontalBox();
-        hboxButtonsM.add(Box.createHorizontalGlue());
         hboxButtonsM.add(buttonMC);
-        hboxButtonsM.add(Box.createHorizontalStrut(15));
-        hboxButtonsM.add(buttonMPlus);
         hboxButtonsM.add(Box.createHorizontalGlue());
+        hboxButtonsM.add(buttonMPlus);
         hboxButtonsM.setBorder(
                 BorderFactory.createLineBorder(Color.PINK));
 
